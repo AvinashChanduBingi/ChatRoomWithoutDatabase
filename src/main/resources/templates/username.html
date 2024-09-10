@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+	body
+	{
+		 height: 80vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: aliceblue;
+		background-color: black;
+	}
+	div
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		align-content: center;
+	}
+	
+</style>
+</head>
+<body>
+<diV>
+	<h1>
+		Welcome to chatroom
+	</h1>
+	<h4> 
+		Enter Username
+	</h4>
+	<form action="/chatroom/usernamecheck" method="get">
+		<input name="username">
+		<input type="submit">
+	</form>
+	
+</diV>
+</body>
+</html>

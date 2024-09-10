@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+	 #heading
+   {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 100px;
+    margin-bottom: -1em;
+   }
+	body
+    {
+        color: white;
+        gap: 0px;
+        background-color: black;
+    }
+    div
+    {
+       display: grid;
+       justify-content: center;
+       align-content: center;
+       flex-direction: column;
+       margin-bottom: 6em;
+    }
+    input
+    {
+        height: 4em;
+        width: 20em;
+        border-radius: 20px;
+        margin-bottom: 2em;
+    }
+    button
+    {
+        height: 2em;
+        width: 10em;
+        border-radius: 20px;
+        margin-left: 6em;
+        background-color: rgba(11, 180, 231, 0.827);
+    }
+    ul
+    {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    li
+    {
+		color: aliceblue;
+        margin-bottom: 2em;
+    }
+</style>
+</head>
+<body>
+	
+<div>
+	<div id="heading">
+	<h1>USER :</h1>
+	<h1 th:text ='${username}' id="username"></h1>
+	</div>
+	<input id="messageInput" type="text" placeholder="Enter Your Message">
+	<button onclick="sendmessage()">Send</button>
+</div>
+<ul id="messages"></ul>
+<script>
+	let socket = new WebSocket('ws://localhost:8080/ws/chatroom');
+	 console.log("hello")
+	 socket.onmessage=function(event){
+		 let messages = document.getElementById("messages");
+		 let messageelement = document.createElement('li');
+		 messageelement.innerText=event.data;
+		 messages.appendChild(messageelement);
+	 }
+	 function sendmessage()
+	 {
+		 let messageinput = document.getElementById('messageInput');
+		 var message = document.getElementById("username").innerText+" : "+messageinput.value;
+		 socket.send(message);
+		 messageinput.value="";
+		 
+	 }
+	 
+</script>
+
+</body>
+</html>
